@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Main from '../components/section/Main'
 import subwayData from '../data/seoulsubwaydata.json'
+import { FaLongArrowAltRight } from "react-icons/fa";
 import line1 from '../assets/img/subwaymapmarker/1호선마커.png';
 import line2 from '../assets/img/subwaymapmarker/2호선마커.png';
 import line3 from '../assets/img/subwaymapmarker/3호선마커.png';
@@ -86,7 +87,7 @@ const Map = () => {
     
         // 노선에 맞는 이미지 URL을 가져옵니다.
         const markerImageSrc = lineImages[station.line]; // 해당 역의 노선에 맞는 이미지
-        const markerImageSize = new window.kakao.maps.Size(24, 35); // 마커 이미지의 크기
+        const markerImageSize = new window.kakao.maps.Size(24, 30); // 마커 이미지의 크기
         const markerImageOption = {offset: new window.kakao.maps.Point(12, 35)}; // 마커 이미지의 옵션(이미지의 중심점 설정)
     
         // 마커 이미지 객체를 생성합니다.
@@ -207,22 +208,23 @@ Object.keys(lines).forEach(line => {
     return (
         <Main title="지도" description="카카오맵">
             <div className="search-container">
-                <div className="search-form">
-                    <form onSubmit={handleSearch}>
-                        <input
-                        type="text"
-                        placeholder="지하철역 검색"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <button type="submit">검색</button>
-                    </form>
-                </div>
-                <div className="route-info">
-                <div>출발지: {startStation}</div>
-                <div>도착지: {endStation}</div>
-                </div>
-            </div>
+  <div className="search-form">
+    <form onSubmit={handleSearch}>
+      <input
+        type="text"
+        placeholder="지하철역 검색"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button type="submit">검색</button>
+    </form>
+    <div className="route-box">
+      <div className="route-info">출발지: {startStation}</div>
+      <FaLongArrowAltRight />
+      <div className="route-info">도착지: {endStation}</div>
+    </div>
+  </div>
+</div>
           <div id="map">지도 로딩중...</div>
         </Main>
     );

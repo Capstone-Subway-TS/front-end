@@ -26,8 +26,9 @@
     left: 260px; // Main 컴포넌트의 padding-left와 동일한 값을 사용
     top: 0;
     width: calc(100vw - 260px); // 전체 뷰포트 너비에서 Main 컴포넌트의 padding-left 값을 뺀 너비
-    height: 100vh; // 전체 뷰포트 높이
-    margin-top: 14cap;
+    height: calc(100vh - 60px); // 전체 뷰포트 높이
+    margin-top: 5cap;
+    border-radius: 20px; /* 둥근 모서리의 반경을 설정하세요 */
   }
 
 
@@ -95,58 +96,77 @@
       }
     }
   }
+
+
   
   .search-container {
-    background-color: black; /* 배경색 */
-    border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    padding: 20px; /* 안쪽 여백 */
-    
-    width: 80%; /* 너비 설정 */
-    max-width: 400px; /* 최대 너비 설정 */
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
+    padding: 10px;
   }
   
-  //검색창
   .search-form {
     display: flex;
-    //justify-content: center;
-    padding: 20px;
-  
-    input {
-      width: 60%;
-      padding: 10px 15px;
-      border: 2px solid #ddd;
-      //border-radius: 20px 0 0 20px;
-      font-size: 16px;
-      color: #333;
-      
-      // 플레이스홀더 스타일
-      &::placeholder {
-        color: #aaa;
-      }
-  
-      // 포커스 시 스타일
-      &:focus {
-        outline: none;
-        border-color: #007bff;
-      }
+    align-items: center; /* 입력 필드와 버튼을 세로 중앙 정렬 */
+    flex-grow: 1; /* 검색 폼이 가능한 많은 공간을 차지하도록 설정 */
+
+    &::placeholder {
+      color: blue;
     }
-  
-    button {
-      padding: 10px 15px;
-      border: 2px solid #007bff;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      //border-radius: 0 20px 20px 0;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-      
-      // 호버 시 스타일
-      &:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-      }
+
+    // 포커스 시 스타일
+    &:focus {
+      outline: none;
+      border-color: #007bff;
     }
+  }
+
+
+  
+  .search-form form {
+    display: flex;
+    flex-grow: 1; /* 폼 내부 요소가 가용 공간을 모두 사용하도록 설정 */
+    border: 1px solid black;
+    border-radius: 2px;
     
   }
+
+  .search-form button {
+    padding: 10px 15px;
+    border: 2px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    
+    //border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    
+    // 호버 시 스타일
+    &:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  }
+
+  
+  .search-form input {
+    flex-grow: 1; /* 입력 필드가 가능한 많은 공간을 차지하도록 설정 */
+    //margin-right: 10px; /* 버튼과의 간격 */
+  }
+  
+  .route-box {
+    display: flex;
+    align-items: center; /* 출발지, 화살표, 도착지를 세로 중앙 정렬 */
+  }
+  
+  .route-info {
+    padding: 10px 10px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    margin: 0 5px; /* 출발지와 도착지 정보 사이의 간격 조정 */
+  }
+
+
+  

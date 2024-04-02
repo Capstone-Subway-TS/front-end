@@ -4,6 +4,8 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Header from './Header'
 import Footer from './Footer'
 
+
+
 const Main = ( props ) => {
     return (
         <HelmetProvider>
@@ -15,7 +17,7 @@ const Main = ( props ) => {
                 {props.title && <title>{props.title}</title>}
                 <meta name="description" content={props.description} />
             </Helmet>
-
+            
             <Header />
             <main id="main" role="main">
                 {props.children}
