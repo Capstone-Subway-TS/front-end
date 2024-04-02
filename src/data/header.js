@@ -14,7 +14,7 @@ export const headerMenus = [
     {
         title: "로그인",
         icon: <RiLoginCircleLine />,
-        src: "/"
+        src: "/login"
     },
     {
         title: "지도",

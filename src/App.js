@@ -16,11 +16,12 @@ const App = () => {
         <BrowserRouter>
             <Suspense fallback={<Main />}>
                 <Routes>
-                    <Route path='/' element={<Login />} />
+                    <Route path='/' element={<Map />} />
                     <Route path="/nav" element={<Nav />} />
                     <Route path="/developer" element={<Developer />} />
                     <Route path='/tsteam' element={<Tsteam />} />
                     <Route path='/map' element={<Map />} />
+                    <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Signup />} />
                 </Routes>
             </Suspense>
