@@ -230,7 +230,7 @@ Object.keys(lines).forEach(line => {
     
 
     return (
-        <Main title="지도" description="카카오맵">
+        <Main title="지도" description="지도 페이지">
             <div className="search-container">
   <div className="search-form">
     <form onSubmit={handleSearch}>

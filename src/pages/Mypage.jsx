@@ -4,7 +4,7 @@ import Main from '../components/section/Main';
 
 const Mypage = () => {
     return (
-        <Main title="로그인" description="로그인 페이지">
+        <Main title="마이페이지" description="마이페이지">
             <h1>여기에 뭘 넣으면 좋겠나요 박종서씨</h1>
         </Main>
     );

@@ -140,8 +140,8 @@ const Developer = () => {
 
     return (
         <Main 
-        title = "추천 영상"
-        description="오늘의 추천 유튜브 영상입니다.">
+        title = "테스트 페이지"
+        description="테스트 페이지">
             <svg ref={ref} width="700" height="700"></svg>
         
         </Main>  

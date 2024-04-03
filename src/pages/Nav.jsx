@@ -7,7 +7,7 @@ const Nav = () => {
     const { startStation = '미선택', endStation = '미선택' } = location.state || {};
 
     return (
-        <Main title="추천 영상" description="오늘의 추천 유튜브 영상입니다.">
+        <Main title="실시간 길찾기" description="실시간 길찾기 페이지">
             <div className="resultsContainer">
                 <h1 className="resultsHeader">길찾기 결과</h1>
                 <p className="resultItem">출발지: {startStation}</p>
