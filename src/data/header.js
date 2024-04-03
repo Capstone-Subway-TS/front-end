@@ -2,6 +2,8 @@ import { FaRegMap } from "react-icons/fa";
 import { IoNavigateCircleOutline } from "react-icons/io5";
 import { FaPeopleRoof } from "react-icons/fa6";
 import { RiLoginCircleLine } from "react-icons/ri";
+import { MdPersonalInjury } from "react-icons/md";
+import { SiBeijingsubway } from "react-icons/si";
 //
 
 
@@ -14,7 +16,7 @@ export const headerMenus = [
     {
         title: "로그인",
         icon: <RiLoginCircleLine />,
-        src: "/"
+        src: "/login"
     },
     {
         title: "지도",
@@ -26,11 +28,23 @@ export const headerMenus = [
         icon: <IoNavigateCircleOutline />,
         src: "/nav"
     },
-    
+
+    {
+        title: "실시간 도착정보",
+        icon: <SiBeijingsubway />,
+        src: "/arrival"
+    },
+
     {
         title: "노선별 실시간 혼잡도",
         icon: <FaPeopleRoof />,
         src: "/developer"
+    },
+
+    {
+        title: "마이페이지",
+        icon: <MdPersonalInjury />,
+        src: "/mypage"
     },
     
     

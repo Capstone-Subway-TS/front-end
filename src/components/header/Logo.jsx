@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaTrainSubway } from "react-icons/fa6";
-import { RiFontColor } from 'react-icons/ri';
 
-const Logo = ({ toggleMenu }) => {
+
+const Logo = () => {
     return (
         <h1 className='header__logo'>
             <Link to='/'>

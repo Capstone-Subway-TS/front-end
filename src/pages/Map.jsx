@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Main from '../components/section/Main'
 import subwayData from '../data/seoulsubwaydata.json'
 import { FaLongArrowAltRight } from "react-icons/fa";
@@ -54,7 +55,21 @@ const Map = () => {
     const [map, setMap] = useState(null); // 지도 인스턴스 상태 관리
     const [startStation, setStartStation] = useState(''); // 출발지 상태 관리
     const [endStation, setEndStation] = useState(''); // 도착지 상태 관리
-  
+    
+
+    //정보 넘겨주기
+    const navigate = useNavigate();
+
+    const navigateToRouteResult = () => {
+        // navigate 함수를 사용하여 페이지 이동 및 state 전달
+        navigate('/nav', { state: { startStation, endStation } });
+    };
+
+
+    const goToArrivalPage = (stationName) => {
+        navigate('/arrival', { state: { stationName } });
+    };
+
     useEffect(() => {
         window.setStation = (stationName, type) => {
             if (type === 'start') {
@@ -113,6 +128,7 @@ const Map = () => {
                         <div>
                         <button onclick="setStation('${station.name}', 'start')">출발</button>
                         <button onclick="setStation('${station.name}', 'end')">도착</button>
+                        <button onclick="window.goToArrivalPage('${station.name}')">실시간 도착정보</button>
                         </div>
                     </div>
                 </div>
@@ -187,10 +203,18 @@ Object.keys(lines).forEach(line => {
               document.getElementById(`overlay-${index}`).style.display = 'block'; // 현재 오버레이 표시
             });
           });
+          window.goToArrivalPage = (stationName) => {
+            navigate('/arrival', { state: { stationName } });
+          };
+
         });
       };
   
-      return () => document.head.removeChild(script);
+      return () => {
+        
+        document.head.removeChild(script);
+        delete window.goToArrivalPage;
+      }
     }, []);
   
     const handleSearch = (e) => {
@@ -212,7 +236,7 @@ Object.keys(lines).forEach(line => {
     <form onSubmit={handleSearch}>
       <input
         type="text"
-        placeholder="지하철역 검색"
+        placeholder="  지하철역 검색"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -222,6 +246,7 @@ Object.keys(lines).forEach(line => {
       <div className="route-info">출발지: {startStation}</div>
       <FaLongArrowAltRight />
       <div className="route-info">도착지: {endStation}</div>
+      <button onClick={navigateToRouteResult}>길찾기</button>
     </div>
   </div>
 </div>
