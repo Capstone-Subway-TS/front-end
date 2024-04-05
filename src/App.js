@@ -1,7 +1,6 @@
-import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './components/section/Main';
-
 
 const Login = lazy(() => import('./pages/Login'));
 const Nav = lazy(() => import('./pages/Nav'));
@@ -12,9 +11,9 @@ const Signup = lazy(() => import('./pages/Signup'));
 const Mypage = lazy(() => import('./pages/Mypage'));
 const Arrival = lazy(() => import('./pages/Arrival'));
 
-const App = () => {
+const App = () => { 
     return (
-        <BrowserRouter>
+        <Router>
             <Suspense fallback={<Main />}>
                 <Routes>
                     <Route path='/' element={<Map />} />
@@ -28,7 +27,7 @@ const App = () => {
                     <Route path='/arrival' element={<Arrival />} />
                 </Routes>
             </Suspense>
-        </BrowserRouter>
+        </Router>
     );
 }
 
