@@ -223,7 +223,7 @@ Object.keys(lines).forEach(line => {
         if (station && map) {
           const moveLatLon = new window.kakao.maps.LatLng(station.lat, station.lng);
           map.setCenter(moveLatLon); // 검색된 지하철역 위치로 지도 중심 이동
-
+          map.setLevel(3); // 확대 수준 조정 
         }
       };
     

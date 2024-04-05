@@ -7,7 +7,7 @@ const Logo = () => {
     return (
         <h1 className='header__logo'>
             <Link to='/'>
-            <FaTrainSubway /><span>TS-Subway Service</span>
+            <span>TS-Subway Service</span>
             </Link>
         </h1>
     )
