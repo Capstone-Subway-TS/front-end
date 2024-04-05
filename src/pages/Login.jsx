@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
 import Main from '../components/section/Main';
 
-const Login = () => {
+const Login = () => { 
     return (
         <Main title="로그인" description="로그인 페이지">
             <div className="login-container">
                 <form className="login-form">
                     <h2>로그인</h2>
                     <div className="form-group">
-                        <label htmlFor="email">이메일</label>
-                        <input type="email" id="email" required />
+                        <label htmlFor="text">아이디</label>
+                        <input type="text" id="text" required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">비밀번호</label>
