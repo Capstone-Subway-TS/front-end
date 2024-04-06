@@ -17,7 +17,7 @@ const Main = ( props ) => {
                 {props.title && <title>{props.title}</title>}
                 <meta name="description" content={props.description} />
             </Helmet>
-            
+
             <Header />
             <main id="main" role="main">
                 {props.children}

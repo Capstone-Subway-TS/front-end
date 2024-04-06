@@ -32,13 +32,13 @@ export const headerMenus = [
     {
         title: "실시간 도착정보",
         icon: <SiBeijingsubway />,
-        src: "/arrival"
+        src: "/developer"
     },
 
     {
         title: "노선별 실시간 혼잡도",
         icon: <FaPeopleRoof />,
-        src: "/developer"
+        src: "/arrival"
     },
 
     {

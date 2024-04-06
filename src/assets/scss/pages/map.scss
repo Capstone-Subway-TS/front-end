@@ -23,11 +23,11 @@
 
   #map {
     position: absolute; // 필요에 따라 조정
-    left: 260px; // Main 컴포넌트의 padding-left와 동일한 값을 사용
+    left: 0px; // Main 컴포넌트의 padding-left와 동일한 값을 사용
     top: 0;
-    width: calc(100vw - 260px); // 전체 뷰포트 너비에서 Main 컴포넌트의 padding-left 값을 뺀 너비
+    width: calc(100vw - 0px); // 전체 뷰포트 너비에서 Main 컴포넌트의 padding-left 값을 뺀 너비
     height: calc(100vh - 60px); // 전체 뷰포트 높이
-    margin-top: 5cap;
+    margin-top: 9cap;
     border-radius: 20px; /* 둥근 모서리의 반경을 설정하세요 */
   }
 
