@@ -98,7 +98,7 @@ const Map = () => {
     
     //
     subwayData.forEach((station, index) => {
-        const markerPosition = new window.kakao.maps.LatLng(station.lat, station.lng);
+        const markerPosition = new window.kakao.maps.LatLng(station.y, station.x);
     
         // 노선에 맞는 이미지 URL을 가져옵니다.
         const markerImageSrc = lineImages[station.line]; // 해당 역의 노선에 맞는 이미지
@@ -221,7 +221,7 @@ Object.keys(lines).forEach(line => {
         e.preventDefault(); // 폼 제출 이벤트 기본 동작 방지
         const station = subwayData.find(station => station.name.includes(searchTerm));
         if (station && map) {
-          const moveLatLon = new window.kakao.maps.LatLng(station.lat, station.lng);
+          const moveLatLon = new window.kakao.maps.LatLng(station.y, station.x);
           map.setCenter(moveLatLon); // 검색된 지하철역 위치로 지도 중심 이동
           map.setLevel(4); // 확대 수준 조정 
         }

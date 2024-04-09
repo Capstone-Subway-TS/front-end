@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import subwayData from '../data/test.json';
 import Main from '../components/section/Main';
 
-const Developer = () => {
+const Routemap = () => {
     const ref = useRef();
 
     useEffect(() => {
@@ -227,8 +227,8 @@ const Developer = () => {
 
     return (
         <Main
-            title="테스트 페이지"
-            description="테스트 페이지"
+            title="지하철 노선도"
+            description="지하철 노선도 페이지"
         >
             <div
                 id="picture"
@@ -255,4 +255,4 @@ const Developer = () => {
     );
 };
 
-export default Developer;
+export default Routemap;

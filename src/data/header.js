@@ -32,7 +32,7 @@ export const headerMenus = [
     {
         title: "실시간 도착정보",
         icon: <SiBeijingsubway />,
-        src: "/developer"
+        src: "/live"
     },
 
     {
@@ -42,9 +42,9 @@ export const headerMenus = [
     },
 
     {
-        title: "마이페이지",
+        title: "지하철 노선도",
         icon: <MdPersonalInjury />,
-        src: "/mypage"
+        src: "/routemap"
     },
     
     
