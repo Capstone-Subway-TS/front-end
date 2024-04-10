@@ -162,7 +162,7 @@ const Map = () => {
                             <div className="route-info">출발지: {startStation}</div>
                             <FaLongArrowAltRight />
                             <div className="route-info">도착지: {endStation}</div>
-                            <button onClick={navigateToRouteResult}>길찾기</button>
+                            <button onClick={navigateToRouteResult}>실시간 길찾기</button>
                         </div>
                     </div>
                 </div>

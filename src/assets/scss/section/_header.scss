@@ -7,8 +7,8 @@
 
 .header__logo {
     text-align: center;
-    margin: 20px;
-    padding: 20px;
+    margin: 20px 20px 0px 20px;
+    padding: 0px 20px 0px 20px;
     background-color: #ffffff; /* 박스 배경 색상 */
     border-radius: 30px; /* 둥근 각 설정 */
     //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
@@ -55,7 +55,7 @@
   }
   
 .header__menu {
-    padding: 10px 0;
+    padding: 10px 0 0 0;
     
     .menu {
         border-bottom: 1px solid white;
@@ -100,8 +100,8 @@
     }
 
     .keyword {
-        padding: 1.25rem;
-
+        padding: 0.5rem;
+        text-align: center;
         li {
             display: inline-block;
 
@@ -135,7 +135,7 @@
     right: 0;
     width: 260px;
     text-align: center;
-    padding: 15px 0 10px;
+    padding: 0px 0 10px;
     background-color: white;
     backdrop-filter: blur(10px);
 
@@ -168,3 +168,44 @@
     }
 }
 
+//Dest.jsx
+.dest-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    margin: 0 auto;
+    text-align: center; // 가운데 정렬
+  }
+  
+  .dest-heading {
+
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .dest-details {
+    margin-bottom: 20px;
+  }
+  
+  .dest-label {
+    font-weight: bold;
+  }
+  
+  .dest-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dest-button:hover {
+    background-color: #0056b3;
+  }
+  
