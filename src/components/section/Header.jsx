@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import Logo from '../header/Logo';
 import Menu from '../header/Menu';
 import Sns from '../header/Sns';
-import Top from '../header/Top';
+import Dest from '../header/Dest';
 
+import { IoMdMenu } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Header = () => {    
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -22,13 +24,13 @@ const Header = () => {
 
     return (
         <div className="header-container">
-            <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? "닫기" : "메뉴"}</button>
-            <div className="top-container">
-                <Top />
-            </div>
+            <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? <IoCloseOutline/> : <IoMdMenu/>}</button>
+            
+            
             
             <header id='header' className={isHeaderVisible ? '' : 'hidden'} role='banner' onClick={closeHeader}>
                 <Logo />
+                <Dest />
                 <Menu />
                 <Sns />
             </header>

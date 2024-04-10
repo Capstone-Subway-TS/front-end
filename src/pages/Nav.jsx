@@ -1,12 +1,14 @@
 
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import Main from '../components/section/Main';
-
+import { useSelector } from 'react-redux'; // useSelector 추가
 
 const Nav = () => {
-    const location = useLocation();
-    const { startStation = '미선택', endStation = '미선택' } = location.state || {};
+
+    // useSelector를 통해 Redux store에서 startStation과 endStation 가져오기
+    const startStation = useSelector(state => state.startStation);
+    const endStation = useSelector(state => state.endStation);
+    
     const yellowSegmentWidth = 30; // 노란색 세그먼트의 너비
     const greenSegmentWidth = 60; // 초록색 세그먼트의 너비
     const totalWidth = yellowSegmentWidth + greenSegmentWidth; // 전체 너비

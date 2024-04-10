@@ -11,7 +11,7 @@
     height: 107.5%;
     overflow-y: auto;
     z-index: 10000;
-    margin-top: 40px;
+    margin-top: 50px;
     border-right: 1px solid white;
     background-color: white;
     transition: left 0.3s ease; /* 트랜지션 효과 추가 */
@@ -92,12 +92,12 @@
     background-color: black;
     color: white;
     border: none;
-    padding: 3px 10px;
+    padding: 5px 12px 1px 12px; /* padding 조정 */
     cursor: pointer;
-    font-size: 16px;
     border-radius: 5px;
     margin-top: 10px;
     margin-left: 0px;
+    font-size: 20px; /* 아이콘 크기 조정 */
 }
 
 .toggle-button:hover {

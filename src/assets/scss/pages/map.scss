@@ -26,8 +26,8 @@
     left: 0px; // Main 컴포넌트의 padding-left와 동일한 값을 사용
     top: 0;
     width: calc(100vw - 0px); // 전체 뷰포트 너비에서 Main 컴포넌트의 padding-left 값을 뺀 너비
-    height: calc(100vh - 60px); // 전체 뷰포트 높이
-    margin-top: 9cap;
+    height: calc(100vh - 0px); // 전체 뷰포트 높이
+    margin-top: 6cap;
     border-radius: 20px; /* 둥근 모서리의 반경을 설정하세요 */
   }
 
@@ -104,6 +104,7 @@
     align-items: center; /* 세로 중앙 정렬 */
     justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
     padding: 10px;
+    margin-top: -40px;
   }
   
   .search-form {
