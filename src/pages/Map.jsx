@@ -66,9 +66,6 @@ const Map = () => {
     };
 
 
-    const goToArrivalPage = (stationName) => {
-        navigate('/arrival', { state: { stationName } });
-    };
 
     useEffect(() => {
         window.setStation = (stationName, type) => {
@@ -128,7 +125,7 @@ const Map = () => {
                         <div>
                         <button onclick="setStation('${station.name}', 'start')">출발</button>
                         <button onclick="setStation('${station.name}', 'end')">도착</button>
-                        <button onclick="window.goToArrivalPage('${station.name}')">실시간 도착정보</button>
+                        <button onclick="window.goToLivePage('${station.name}')">실시간 도착정보</button>
                         </div>
                     </div>
                 </div>
@@ -203,9 +200,11 @@ Object.keys(lines).forEach(line => {
               document.getElementById(`overlay-${index}`).style.display = 'block'; // 현재 오버레이 표시
             });
           });
-          window.goToArrivalPage = (stationName) => {
-            navigate('/developer', { state: { stationName } });
+          
+          window.goToLivePage = (stationName) => {
+            navigate('/live', { state: { stationName } });
           };
+          
 
         });
       };
