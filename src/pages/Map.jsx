@@ -19,6 +19,8 @@ import line9 from '../assets/img/subwaymapmarker/9호선마커.png';
 
 const lineImages = {
     "1호선": line1,
+    "경원선": line1,
+    "경부선": line1,
     "2호선": line2,
     "3호선": line3,
     "4호선": line4,
@@ -109,6 +111,9 @@ const Map = () => {
                             </div>
                         </div>
                     `;
+                    //
+                    
+                    //
 
                     const overlay = new window.kakao.maps.CustomOverlay({
                         content: content,

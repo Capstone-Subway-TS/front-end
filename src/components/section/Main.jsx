@@ -22,7 +22,7 @@ const Main = ( props ) => {
             <main id="main" role="main">
                 {props.children}
             </main>
-            <Footer />
+            
         </HelmetProvider>
     )
 }

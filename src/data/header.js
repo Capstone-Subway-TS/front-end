@@ -4,6 +4,7 @@ import { FaPeopleRoof } from "react-icons/fa6";
 import { RiLoginCircleLine } from "react-icons/ri";
 import { MdPersonalInjury } from "react-icons/md";
 import { SiBeijingsubway } from "react-icons/si";
+import { SlVector } from "react-icons/sl";
 //
 
 
@@ -36,14 +37,14 @@ export const headerMenus = [
     },
 
     {
-        title: "노선별 실시간 혼잡도",
+        title: "노선별 혼잡도",
         icon: <FaPeopleRoof />,
         src: "/arrival"
     },
 
     {
         title: "지하철 노선도",
-        icon: <MdPersonalInjury />,
+        icon: <SlVector />,
         src: "/routemap"
     },
     

@@ -51,33 +51,6 @@ const Routemap = () => {
             if (line === "8호선") return "#F14C82";
             if (line === "9호선") return "#AA9872";
             return "black"; // 기본 색상
-            /*
-    
-    "경강선": "#003DA5",
-    "경의선": "#77C4A3",
-    "경춘선": "#0C8E72",
-    "공항철도": "#3681B7",
-    "분당선": "#F5A200",
-    "서해선": "#81A914",
-    "수인선": "#F06A00",
-    "신분당선": "#D4003B",
-    "안산선": "#00A5DE",
-    "우이신설경전철": "#B0CE18",
-    "의정부경전철": "#FFD400",
-    "인천1호선": "#8CADCB",
-    "인천2호선": "#F5A200",
-    "인천선": "#FF8000",
-    "일산선": "#B0CE18",
-    "장항선": "#F5A200",
-    "중앙선": "#77C4A3",
-    "김포도시철도": "#BDB092",
-    "신림선": "#738C00",
-    "용인경전철": "#509F22",
-    "경전철의정부": "#FFD400",
-    "김포골드라인": "#A17E46",
-    "인천공항 자기부상철도": "#0B4CA2",
-
-             */
         };
 
         // 데이터를 라인별로 그룹화
@@ -111,7 +84,8 @@ const Routemap = () => {
                 .attr("stroke-width", 2)
                 .on("click", function (event, d) {
                     event.stopPropagation(); // 이벤트 버블링 방지
-                    showTooltip(d);
+                    const [clickX, clickY] = d3.pointer(event, svg.node());
+                    showTooltip(d, clickX, clickY);
                 });
         }
 
@@ -158,12 +132,12 @@ const Routemap = () => {
         }
 
         // 말풍선 표시 함수
-        const showTooltip = (data) => {
+        const showTooltip = (data, clickX, clickY) => {
             d3.select(".tooltip").remove(); // 기존 툴팁 제거
 
             const tooltip = svg.append("g")
                 .attr("class", "tooltip")
-                .attr("transform", `translate(${xScale(parseFloat(data.x))}, ${yScale(parseFloat(data.y)) - 120})`);
+                .attr("transform", `translate(${clickX}, ${clickY - 120})`);
 
             tooltip.append("rect")
                 .attr("width", 150)
