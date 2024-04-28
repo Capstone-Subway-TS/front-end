@@ -13,13 +13,14 @@
     border-radius: 30px; /* 둥근 각 설정 */
     //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
     position: relative; /* 상대 위치 설정 */
+
     
     
 
     a {
       text-decoration: none;
       display: inline-block;
-      font-size: 30px;
+      font-size: 40px;
       font-weight: 800;
       font-family: 'Lato', sans-serif; /* Lato 글꼴 사용 */
       position: relative; /* 상대 위치 설정 */
@@ -51,6 +52,7 @@
       margin-top: 10px; /* 로고와 텍스트 사이 간격 설정 */
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* 글자 그림자 효과 추가 */
       letter-spacing: 1px; /* 글자 간격 조정 */
+
     }
   }
   
