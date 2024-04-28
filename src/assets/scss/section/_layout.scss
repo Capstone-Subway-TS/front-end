@@ -3,6 +3,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 
+#right {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 400px;
+    height: 100%; /* 수정: 오른쪽 레이아웃의 높이를 100%로 설정 */
+    overflow-y: auto;
+    z-index: 10000;
+    border-right: 1px solid white;
+    background-color: white;
+}
+
+#right.hidden {
+    right: -400px; /* 수정: 오른쪽으로 숨기기 */
+}
+
+
+
 #header {
     position: absolute;
     left: 0;
@@ -32,6 +50,7 @@
         left: 0; /* 화면이 작을 때는 왼쪽에 고정 */
     }
 
+
     #header.hidden {
         left: -260px; /* 화면이 작을 때 숨김 */
     }
@@ -46,7 +65,7 @@
     top: 300px;
 }
 
-
+/*
 #footer {
     text-align: center;
     background-color: var(--black100);
@@ -58,7 +77,7 @@
     font-size: 0.8rem;
 }
 
-
+*/
 
 @media (max-width: 800px){
     #header {

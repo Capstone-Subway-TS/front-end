@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import Header from './Header'
 import Footer from './Footer'
-
+import Right from './Right'
 
 
 const Main = ( props ) => {
@@ -19,9 +19,11 @@ const Main = ( props ) => {
             </Helmet>
 
             <Header />
+            <Right />
             <main id="main" role="main">
                 {props.children}
             </main>
+           
             
         </HelmetProvider>
     )
