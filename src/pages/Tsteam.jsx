@@ -17,7 +17,7 @@ const teamMembers = [
 
 const Tsteam = () => {
     return (
-        <Main title="TS팀 구성" description="캡스톤디자인 TS팀입니다">
+        <Main title="TS팀 구성" description="TS팀 구성 페이지">
             <div className="team-section">
                 {teamMembers.map((member, index) => (
                     <div key={index} className="team-member">

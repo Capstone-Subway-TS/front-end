@@ -1,18 +1,42 @@
+// Header.jsx
 
-import React from 'react'
-
+import React, { useState } from 'react';
 import Logo from '../header/Logo';
 import Menu from '../header/Menu';
 import Sns from '../header/Sns';
+import Dest from '../header/Dest';
+
+import { IoMdMenu } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Header = () => {    
-    return (
-        <header id='header' role='banner' >
-            <Logo />
-            <Menu />
-            <Sns />
-        </header>
-    )
-}
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
-export default Header
+    const toggleHeader = () => {
+        setIsHeaderVisible(!isHeaderVisible);
+    };
+
+    const closeHeader = () => {
+        if (isHeaderVisible) {
+            setIsHeaderVisible(false);
+        }
+    };
+
+    return (
+        <div className="header-container">
+            <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? <IoCloseOutline/> : <IoMdMenu/>}</button>
+            
+            
+            
+            <header id='header' className={isHeaderVisible ? '' : 'hidden'} role='banner' onClick={closeHeader}>
+                <Logo />
+                <Dest />
+                <Menu />
+                <Sns />
+            </header>
+            
+        </div>
+    );
+};
+
+export default Header;

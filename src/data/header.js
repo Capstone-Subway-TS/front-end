@@ -4,6 +4,7 @@ import { FaPeopleRoof } from "react-icons/fa6";
 import { RiLoginCircleLine } from "react-icons/ri";
 import { MdPersonalInjury } from "react-icons/md";
 import { SiBeijingsubway } from "react-icons/si";
+import { SlVector } from "react-icons/sl";
 //
 
 
@@ -23,28 +24,29 @@ export const headerMenus = [
         icon: <FaRegMap />,
         src: "/map"
     },
+    /*
     {
-        title: "실시간 길찾기",
+        title: "실시간 길찾기 (삭제)",
         icon: <IoNavigateCircleOutline />,
         src: "/nav"
     },
 
     {
-        title: "실시간 도착정보",
+        title: "실시간 도착정보 (삭제)",
         icon: <SiBeijingsubway />,
+        src: "/live"
+    },
+
+    {
+        title: "노선별 혼잡도 (삭제)",
+        icon: <FaPeopleRoof />,
         src: "/arrival"
     },
-
+    */
     {
-        title: "노선별 실시간 혼잡도",
-        icon: <FaPeopleRoof />,
-        src: "/developer"
-    },
-
-    {
-        title: "마이페이지",
-        icon: <MdPersonalInjury />,
-        src: "/mypage"
+        title: "지하철 노선도",
+        icon: <SlVector />,
+        src: "/routemap"
     },
     
     
@@ -63,22 +65,7 @@ export const searchKeyword = [
 export const snsLink = [
     {
         title: "github",
-        url: "https://github.com/webstoryboy",
+        url: "https://github.com/Capstone-Subway-TS",
         icon: <AiFillGithub />
-    },
-    {
-        title: "youtube",
-        url: "https://www.youtube.com/webstoryboy",
-        icon: <AiFillYoutube />
-    },
-    {
-        title: "codepen",
-        url: "https://codepen.io/webstoryboy",
-        icon: <AiOutlineCodepen />
-    },
-    {
-        title: "instagram",
-        url: "https://www.instagram.com/webstoryboy",
-        icon: <AiOutlineInstagram />
     },
 ]
