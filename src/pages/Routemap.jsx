@@ -153,9 +153,9 @@ const Routemap = () => {
             .append("text")
             .attr("class", "station-name")
             .attr("x", d => xScale(parseFloat(d.x)) * 4) // 역 이름에도 2를 곱하여 2배로 확장
-            .attr("y", d => yScale(parseFloat(d.y)) * 3.7 -200 + 20) // 역 이름에도 2를 곱하여 2배로 확장
+            .attr("y", d => yScale(parseFloat(d.y)) * 3.7 -200 + 30) // 역 이름에도 2를 곱하여 2배로 확장
             .attr("text-anchor", "middle")
-            .attr("font-size", "14px")
+            .attr("font-size", "18px")
             .attr("fill", "black")
             .attr("font-weight", "bold") // 굵은 텍스트 설정
             .text(d => d.name);

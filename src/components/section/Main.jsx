@@ -2,8 +2,6 @@ import React from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import Header from './Header'
-import Footer from './Footer'
-import Right from './Right'
 
 
 const Main = ( props ) => {
