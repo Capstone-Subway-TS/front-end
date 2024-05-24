@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Main from '../components/section/Main';
 import { useSelector } from 'react-redux';
+import { getCurrentTime, getDayType } from '../data/time';
+
+
 
 const Nav = () => {
     const startStation = useSelector(state => state.startStation);
     const endStation = useSelector(state => state.endStation);
+
+    const [currentTime, setCurrentTime] = useState(getCurrentTime());
+    const [dayType, setDayType] = useState(getDayType());
+
+
+
+
+    useEffect(() => {
+
+
+        const timer = setInterval(() => {
+            setCurrentTime(getCurrentTime());
+        }, 1000);
+
+        return () => clearInterval(timer);
+
+        
+    }, []);
 
     const yellowSegmentWidth = 30;
     const greenSegmentWidth = 60;
@@ -17,14 +38,12 @@ const Nav = () => {
         <Main title="실시간 길찾기" description="실시간 길찾기 페이지">
             <div className="resultsContainer">
                 <h1 className="resultsHeader">길찾기 결과</h1>
-                {/* 데이터가 존재하는 경우에만 출발지와 도착지 정보 표시 */}
                 {startStation && (
                     <p className="resultItem">출발지: {startStation}</p>
                 )}
                 {endStation && (
                     <p className="resultItem">도착지: {endStation}</p>
                 )}
-                {/* 데이터가 없는 경우에 대체 내용 표시 */}
                 {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}
                 {!endStation && <p className="resultItem">도착지 정보가 없습니다.</p>}
             </div>
@@ -37,6 +56,10 @@ const Nav = () => {
                     <circle cx={startPoint.x} cy={startPoint.y} r="5" fill="blue" />
                     <circle cx={endPoint.x} cy={endPoint.y} r="5" fill="red" />
                 </svg>
+            </div>
+            <div className="currentTimeContainer">
+                <p className="currentTime">현재 시간: {currentTime}</p>
+                <p className="dayType">오늘은 {dayType}입니다.</p>
             </div>
         </Main>
     )

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as d3 from 'd3';
-import subwayData from '../data/test.json';
+import subwayData from '../data/route.json';
 import Main from '../components/section/Main';
 import mark from '../assets/img/icon/환승역_마크.png';
 import { IoSearch } from "react-icons/io5";

@@ -24,24 +24,25 @@ export const headerMenus = [
         icon: <FaRegMap />,
         src: "/map"
     },
+    /*
     {
-        title: "실시간 길찾기",
+        title: "실시간 길찾기 (삭제)",
         icon: <IoNavigateCircleOutline />,
         src: "/nav"
     },
 
     {
-        title: "실시간 도착정보",
+        title: "실시간 도착정보 (삭제)",
         icon: <SiBeijingsubway />,
         src: "/live"
     },
 
     {
-        title: "노선별 혼잡도",
+        title: "노선별 혼잡도 (삭제)",
         icon: <FaPeopleRoof />,
         src: "/arrival"
     },
-
+    */
     {
         title: "지하철 노선도",
         icon: <SlVector />,
