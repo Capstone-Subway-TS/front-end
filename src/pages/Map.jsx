@@ -70,7 +70,7 @@ const Map = () => {
     const sanitizedSuggestion = suggestion.includes('-') ? suggestion.split('-')[0].trim() : suggestion;
         setSearchTerm(sanitizedSuggestion); // 정제된 제안을 검색어로 설정
         setSuggestions([]); // 제안 목록 초기화
-};
+    };
 
 
 // Function to handle search term change
