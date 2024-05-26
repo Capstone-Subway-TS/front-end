@@ -24,7 +24,10 @@ const Header = () => {
 
     return (
         <div className="header-container">
-            <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? <IoCloseOutline/> : <IoMdMenu/>}</button>
+            <div className="hcc">
+                <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? <IoCloseOutline/> : <IoMdMenu/>}</button>
+            </div>
+            
             
             
             

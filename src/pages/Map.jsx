@@ -299,7 +299,7 @@ const handleSearchTermChange = (e) => {
             <div id="map">지도 로딩중...</div>
             {/* 내 위치로 이동 버튼 */}
             <div className="location-button" onClick={moveToUserLocation}>
-                <MdMyLocation size={30}/>
+                <MdMyLocation/>
             </div>
             {isRightVisible && <Right isVisible={isRightVisible} toggleRightVisibility={toggleRightVisibility} stationName={stationName} />}
         </Main>

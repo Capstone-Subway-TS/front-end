@@ -62,8 +62,8 @@
     width: 260px;
     height: 107.5%;
     overflow-y: auto;
-    z-index: 10000;
-    margin-top: 50px;
+    z-index: 1000;
+    margin-top: 60px;
     border-right: 1px solid white;
     background-color: white;
     transition: left 0.3s ease; /* 트랜지션 효과 추가 */
@@ -79,16 +79,7 @@
 }
 
 
-@media (max-width: 800px) {
-    #header {
-        left: 0; /* 화면이 작을 때는 왼쪽에 고정 */
-    }
 
-
-    #header.hidden {
-        left: -260px; /* 화면이 작을 때 숨김 */
-    }
-}
 
 
 #main {
@@ -112,25 +103,6 @@
 }
 
 */
-
-@media (max-width: 800px){
-    #header {
-        left: -260px;
-
-        h1 {
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-    }
-    #main {
-        padding-left: 0;
-    }
-    #footer {
-        width: 100%;
-        margin-left: 0;
-    }
-}
 
 
 .header-container {
@@ -174,4 +146,33 @@
 #right, #header, .top-container span {
     font-family: 'omyu_pretty';
     font-size: 20px;
+}
+
+
+@media (max-width: 800px) {
+    #header {
+        left: 0px;
+        width: 150px;
+    }
+
+    #header.hidden {
+        left: -260px;
+    }
+
+    .toggle-button {
+        font-size: 20px;
+        margin-left: -20px;
+        margin-top: 10px;
+        padding-top: 10px;
+
+    }
+    #main {
+        padding-left: 160px;
+    }
+
+    #right{
+        width: 220px;
+        font-size: 17px;
+    }
+
 }

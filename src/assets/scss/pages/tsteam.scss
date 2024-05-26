@@ -49,3 +49,29 @@
 .team-link:hover {
   background-color: #0056b3;
 }
+
+.team-section{
+  img{
+    width: 200px;  // 너비를 100px로 지정
+    height: 250px; // 높이를 100px로 지정
+  }
+}
+
+@media (max-width: 800px) {
+
+  .team-member {
+    width: 70%;
+    height: 70%;
+    font-size: 10px;
+    p{
+      padding: 0px 0px 3px 0px;
+    }
+  }
+  .team-section{
+    img{
+      width: 70%;
+      height: 70%;
+    }
+  }
+
+}
