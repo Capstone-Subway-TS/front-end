@@ -20,8 +20,6 @@
     z-index: 10000;
     border-right: 1px solid white;
     background-color: white;
-    border-radius: 40px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -175,4 +173,38 @@
         font-size: 17px;
     }
 
+}
+
+.congestion-level {
+    margin-top: 10px;
+}
+
+.congestion-boxes {
+    display: flex;
+}
+
+.congestion-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    border: 1px solid #000;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
 }
