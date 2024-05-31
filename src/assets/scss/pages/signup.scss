@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh; // 화면 전체 높이
+    font-family: 'MaplestoryOTFBold';
   
     .signup-form {
       width: 100%;
@@ -36,6 +37,7 @@
       }
   
       button {
+        font-family: 'MaplestoryOTFBold';
         width: 100%;
         padding: 10px;
         border: none;
