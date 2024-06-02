@@ -6,16 +6,16 @@ import train from '../assets/img/nav/train.png';
 import wait from '../assets/img/nav/waiting.png';
 import walk from '../assets/img/nav/walk.png';
 import { Link, useNavigate } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
-export let ctime = 0;
+import { ctime } from './Nav';
 
-const Nav = () => {
+const Pre = () => {
     const startStation = useSelector(state => state.startStation);
     const endStation = useSelector(state => state.endStation);
-    const [currentTime, setCurrentTime] = useState(getCurrentTime()); // 현재 시간 상태 변수
     const [dayType, setDayType] = useState(getDayType());
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
     let ingtime=[0];
+    const currentTime = ctime;
     const [results, setResults] = useState([
         {
             "path": [
@@ -130,68 +130,26 @@ const Nav = () => {
     ]);
 
 
-    useEffect(() => {
-        const fetchDataFromSpring = async () => {
-            try {
-                const url = `http://localhost:8080/SearchRoute?start=${encodeURIComponent(startStation)}&end=${encodeURIComponent(endStation)}`;
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-                const data = await response.json();
-                setResults(data);
-            } catch (error) {
-                console.error('데이터 가져오기 실패:', error);
-            }
-        };
-        if (startStation && endStation) {
-            fetchDataFromSpring();
-        }
-    }, [startStation, endStation]);
     
 
-    
 
-    // 시간 문자열을 초로 변환하는 함수
-    const getCurrentTimeInSeconds = () => {
-        const now = new Date();
-        const hoursInSeconds = now.getHours() * 3600;
-        const minutesInSeconds = now.getMinutes() * 60;
-        const seconds = now.getSeconds();
-        return hoursInSeconds + minutesInSeconds + seconds;
-    };
-    
-    if (ctime === 0) {
-        ctime = getCurrentTimeInSeconds();
-    }
-
-    const handleButtonClick = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            navigate('/Pre');
-        }, 1000);
-    };
-    
-    
 
     const renderResults = () => {
         return results.map((result, index) => (
             
+            
             <div key={index} className="resultsMap">
-                <h1 className="resultsHeader">길찾기 결과 {index + 1}</h1>
-                <h3>출발 시간: {Math.floor((ctime) / (60*60))}시 {Math.floor((ctime) % (60*60)/60)}분 {Math.floor((ctime)% 60)}초, ({dayType})</h3>
+                <h1 className="resultsHeader">AI 예측 길찾기 결과 {index + 1}</h1>
+                <h3>출발 시간: {Math.floor((currentTime) / (60*60))}시 {Math.floor((currentTime) % (60*60)/60)}분 {Math.floor((currentTime)% 60)}초, ({dayType})</h3>
                 <div className="visualRepresentation" style={{ width: '1250px', height: '30px', backgroundColor: 'lightgray', margin: '20px 0' }}>
                     {renderTransferBars(result)}
                 </div>
-                <p className="scheduleTime">도착 시간(시간표): {Math.floor((ctime+result.totalTime) / (60*60))}시 {Math.floor((ctime+result.totalTime) % (60*60)/60)}분 {Math.floor((ctime+result.totalTime)% 60)}초</p>
+                <p className="scheduleTime">도착 시간(시간표): {Math.floor((currentTime+result.totalTime) / (60*60))}시 {Math.floor((currentTime+result.totalTime) % (60*60)/60)}분 {Math.floor((currentTime+result.totalTime)% 60)}초</p>
                 {result.path && (
                     <>
                         <p className="resultItem">걸리는시간: {Math.floor(result.totalTime / 60)}분 {Math.floor(result.totalTime % 60)}초</p>
                         {result.eachTypeOfLine.map((line, index) => (
-                            <p key={index} className="resultItem">{index + 1}번 환승: {line}({result.eachTransferStation[index]}) - {Math.floor((ctime+ingtime[index]) / (60*60))}시 {Math.floor((ctime+ingtime[index]) % (60*60)/60)}분 {Math.floor((ctime+ingtime[index])% 60)}초 열차 탑승</p>
+                            <p key={index} className="resultItem">{index + 1}번 환승: {line}({result.eachTransferStation[index]}) - {Math.floor((currentTime+ingtime[index]) / (60*60))}시 {Math.floor((currentTime+ingtime[index]) % (60*60)/60)}분 {Math.floor((currentTime+ingtime[index])% 60)}초 열차 탑승</p>
                         ))}
                     </>
                 )}
@@ -304,13 +262,7 @@ const Nav = () => {
             <Main title="실시간 길찾기" description="실시간 길찾기 페이지">
                 
                 <div className="resultsContainer">
-                    <h1 className="resultsHeader">출발지/도착지 <p className="pre-but">
-                {loading ? (
-                    <div>로딩 중...</div>
-                ) : (
-                    <button onClick={handleButtonClick} style={{ backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>AI Predict</button>
-                )}
-            </p></h1> 
+                    <h1 className="resultsHeader">출발지/도착지</h1> 
                     {startStation && <p className="resultItem">출발지: {startStation}</p>}
                     {endStation && <p className="resultItem">도착지: {endStation}</p>}
                     {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}
@@ -322,4 +274,4 @@ const Nav = () => {
         );
         };
 
-export default Nav;
+export default Pre;

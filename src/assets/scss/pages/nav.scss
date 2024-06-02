@@ -95,3 +95,58 @@
 .waitTime {
     background-color: yellow;
 }
+
+//
+.pre-but {
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #45a049;
+        border-color: #45a049;
+    }
+
+    &:active {
+        background-color: #3e8e41;
+        border-color: #3e8e41;
+    }
+}
+
+.pre-but {
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #45a049;
+        border-color: #45a049;
+    }
+
+    &:active {
+        background-color: #3e8e41;
+        border-color: #3e8e41;
+    }
+}

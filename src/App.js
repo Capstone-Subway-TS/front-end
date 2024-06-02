@@ -10,6 +10,7 @@ const Tsteam = lazy(() => import('./pages/Tsteam'));
 const Map = lazy(() => import('./pages/Map'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Routemap = lazy(() => import('./pages/Routemap'));
+const Pre = lazy(() => import('./pages/Pre'));
 
 const App = () => {
     return (
@@ -18,12 +19,13 @@ const App = () => {
                 <Suspense fallback={<Main />}>
                     <Routes>
                         <Route path='/' element={<Map />} />
-                        <Route path="/nav" element={<Nav />} />
+                        <Route path='/nav' element={<Nav />} />
                         <Route path='/tsteam' element={<Tsteam />} />
                         <Route path='/map' element={<Map />} />
                         <Route path='/login' element={<Login />} />
                         <Route path='/signup' element={<Signup />} />
                         <Route path='/routemap' element={<Routemap />} />
+                        <Route path='/pre' element={<Pre />} />
                     </Routes>
                 </Suspense>
             </Router>

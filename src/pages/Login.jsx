@@ -5,6 +5,8 @@ import Main from '../components/section/Main';
 const Login = () => { 
     return (
         <Main title="로그인" description="로그인 페이지">
+
+            {
             <div className="login-container">
                 <form className="login-form">
                     <h2>로그인</h2>
@@ -22,8 +24,14 @@ const Login = () => {
                     </div>
                 </form>
             </div>
+        }
+
+
+        
         </Main>
     );
 };
 
 export default Login;
+
+
