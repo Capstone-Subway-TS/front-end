@@ -242,3 +242,30 @@
   }
 
 }
+
+
+.notice {
+  border: 2px solid #f33712;
+  background-color: #fdf2e3;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+  position: relative;
+  max-width: 600px;
+}
+
+.notice::before {
+  content: '공지사항';
+  position: absolute;
+  top: -13px;
+  left: 10px;
+  background-color: #f33712;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -325,6 +325,9 @@ function removeHighlightedCircle() {
                         />
                         <button type="submit"> <IoSearch size={20} /> </button>
                     </form>
+                    <div className="notice">
+                        [2024-06-13] 4호선 하행선, 상행선 10분 지연
+                    </div>
                     {suggestions.length > 0 && (
                         <ul className="suggestions">
                             {suggestions.map((suggestion, index) => (
