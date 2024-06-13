@@ -14,13 +14,126 @@ export let navPath = [];
 const Nav = () => {
     const startStation = useSelector(state => state.startStation);
     const endStation = useSelector(state => state.endStation);
-    const [dayType, setDayType] = useState(getDayType());
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
     const { hour, minute, weekday } = useTime();
     let ingtime=[0];
 
+    /*
     const [results, setResults] = useState([]);
+    */
+    const [results, setResults] = useState([
+        {
+            "path": [
+                "장한평",
+                "군자(능동)"
+            ],
+            "finalTime": "12:31:55",
+            "eachTransferStation": [],
+            "startLine": "5호선",
+            "eachTime": [],
+            "eachWalkingTime": [],
+            "eachTypeOfLine": [],
+            "eachWaitingTime": [],
+            "totalTime": 100
+        },
+        {
+            "path": [
+                "장한평",
+                "답십리",
+                "마장",
+                "왕십리(성동구청)",
+                "한양대",
+                "뚝섬",
+                "성수",
+                "건대입구",
+                "어린이대공원(세종대)",
+                "군자(능동)"
+            ],
+            "finalTime": "13:05:40",
+            "eachTransferStation": [
+                "왕십리(성동구청)",
+                "건대입구",
+                "수락산"
+            ],
+            "startLine": "5호선",
+            "eachTime": [
+                260,
+                330,
+                400
+            ],
+            "eachWalkingTime": [
+                180,
+                240,
+                400
+            ],
+            "eachTypeOfLine": [
+                "2호선",
+                "7호선",
+                "2호선"
+
+            ],
+            "eachWaitingTime": [
+                265,
+                90,
+                400
+            ],
+            "totalTime": 3325
+        },
+        {
+            "path": [
+                "장한평",
+                "답십리",
+                "마장",
+                "왕십리(성동구청)",
+                "행당",
+                "신금호",
+                "청구",
+                "신당",
+                "동묘앞",
+                "창신",
+                "보문",
+                "안암(고대병원앞)",
+                "고려대(종암)",
+                "월곡(동덕여대)",
+                "상월곡(한국과학기술연구원)",
+                "돌곶이",
+                "석계",
+                "태릉입구",
+                "먹골",
+                "중화",
+                "상봉(시외버스터미널)",
+                "면목",
+                "사가정",
+                "용마산",
+                "중곡",
+                "군자(능동)"
+            ],
+            "finalTime": "13:25:50",
+            "eachTransferStation": [
+                "청구",
+                "태릉입구"
+            ],
+            "startLine": "5호선",
+            "eachTime": [
+                500,
+                810
+            ],
+            "eachWalkingTime": [
+                120,
+                120
+            ],
+            "eachTypeOfLine": [
+                "6호선",
+                "7호선"
+            ],
+            "eachWaitingTime": [
+                465,
+                90
+            ],
+            "totalTime": 3335
+        }
+    ]);
 
 
 
@@ -59,6 +172,8 @@ const Nav = () => {
             navigate('/Pre',{state:{results:results}});
         }, 1000);
     };
+
+
     
     
 
@@ -66,14 +181,23 @@ const Nav = () => {
         return results.map((result, index) => (
             <div key={index} className="resultsMap">
                 <h1 className="resultsHeader">길찾기 결과 {index + 1}</h1>
-                <h3>출발 시간: {Math.floor((ctime) / (60*60))}시 {Math.floor((ctime) % (60*60)/60)}분 {Math.floor((ctime)% 60)}초, ({dayType})</h3>
+                <h3>출발 시간: {Math.floor((ctime) / (60*60))}시 {Math.floor((ctime) % (60*60)/60)}분 {Math.floor((ctime)% 60)}초, ({weekday})</h3>
                 <div className="visualRepresentation" style={{ width: '1250px', height: '30px', backgroundColor: 'lightgray', margin: '20px 0' }}>
                     {renderTransferBars(result)}
                 </div>
                 <p className="scheduleTime">도착 시간(시간표): {Math.floor((ctime+result.totalTime) / (60*60))}시 {Math.floor((ctime+result.totalTime) % (60*60)/60)}분 {Math.floor((ctime+result.totalTime)% 60)}초</p>
+                
                 {result.path && (
                     <>
                         <p className="resultItem">걸리는시간: {Math.floor(result.totalTime / 60)}분 {Math.floor(result.totalTime % 60)}초</p>
+                        <p className="resultItem">경로: {result.path.map((place, index) => {
+                        // 마지막 요소가 아니면 ->를 붙여줌
+                        if (index !== result.path.length - 1) {
+                            return `${place} -> `;
+                        } else {
+                            return place; // 마지막 요소는 ->를 붙이지 않음
+                        }
+                        })}</p>
                         {result.eachTypeOfLine.map((line, index) => (
                             <p key={index} className="resultItem">{index + 1}번 환승: {line}({result.eachTransferStation[index]}) - {Math.floor((ctime+ingtime[index]) / (60*60))}시 {Math.floor((ctime+ingtime[index]) % (60*60)/60)}분 {Math.floor((ctime+ingtime[index])% 60)}초 열차 탑승</p>
                         ))}

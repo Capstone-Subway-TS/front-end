@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import axios from 'axios';
+import covData from '../../data/cov.json'; // Adjust the path as per your project structure
+import { MdElevator } from "react-icons/md";
+import { FaWheelchair } from "react-icons/fa";
+import { LuParkingCircle } from "react-icons/lu";
+import { GiVendingMachine } from "react-icons/gi";
+import { FcSelfServiceKiosk } from "react-icons/fc";
+import { FaTrainSubway } from "react-icons/fa6";
+import { LiaPlaceOfWorshipSolid } from "react-icons/lia";
+import { MdLocationCity } from "react-icons/md";
+import { FaBabyCarriage } from "react-icons/fa";
 
 const lineImages = {
     1001: require('../../assets/img/subwaymapmarker/1호선마커.png'),
@@ -24,6 +34,8 @@ const Right = ({ isVisible, toggleRightVisibility, stationName, stationLine }) =
     const [arrivalInfo, setArrivalInfo] = useState(null); // 도착 정보 상태
     const printedDirections = [];
 
+    console.log(stationName);
+    const stationInfo = covData.find(item => item.station_name === stationName);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -233,7 +245,24 @@ const Right = ({ isVisible, toggleRightVisibility, stationName, stationLine }) =
                     )}
                 </div>
             )}
+            {stationInfo && (
+    <div>
+        <h4>편의시설 정보</h4>
+        <div className='conv'>
+        <p>{stationInfo.el === 'Y' && <MdElevator />}{stationInfo.el === 'Y' && "엘리베이터" }</p>
+        <p>{stationInfo.wl === 'Y' && <FaWheelchair />}{stationInfo.wl === 'Y' && "휘체어리프트"}</p>
+        <p>{stationInfo.parking === 'Y' && <LuParkingCircle />}{stationInfo.parking === 'Y' && "환승주차장"}</p>
+        <p>{stationInfo.cim === 'Y' && <GiVendingMachine />}{stationInfo.cim === 'Y' && "무인민원발급기"}</p>
+        <p>{stationInfo.exchange === 'Y' && <FcSelfServiceKiosk />}{stationInfo.exchange === 'Y' && "환전키오스크"}</p>
+        <p>{stationInfo.train === 'Y' && <FaTrainSubway />}{stationInfo.train === 'Y' &&"기차예매역" }</p>
+        <p>{stationInfo.culture === 'Y' && <LiaPlaceOfWorshipSolid />}{stationInfo.culture === 'Y' && "문화공간"}</p>
+        <p>{stationInfo.place === 'Y' && <MdLocationCity />}{stationInfo.place === 'Y' && "만남의장소"}</p>
+        <p>{stationInfo.fdroom === 'Y' && <FaBabyCarriage />}{stationInfo.fdroom === 'Y' && "유아수유방"}</p>
         </div>
+    </div>
+)}
+        </div>
+        
     );
 };
 
