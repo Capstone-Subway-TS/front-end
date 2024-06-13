@@ -3,6 +3,8 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './components/section/Main';
 import { Provider } from 'react-redux';
 import store from './data/store'; // Redux store 불러오기
+import { TimeProvider } from './data/TimeContext';
+
 
 const Login = lazy(() => import('./pages/Login'));
 const Nav = lazy(() => import('./pages/Nav'));
@@ -14,6 +16,7 @@ const Pre = lazy(() => import('./pages/Pre'));
 
 const App = () => {
     return (
+        <TimeProvider>
         <Provider store={store}> {/* Redux Provider 추가 */}
             <Router>
                 <Suspense fallback={<Main />}>
@@ -30,6 +33,7 @@ const App = () => {
                 </Suspense>
             </Router>
         </Provider>
+        </TimeProvider>
     );
 }
 

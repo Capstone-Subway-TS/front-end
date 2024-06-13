@@ -6,16 +6,22 @@ import train from '../assets/img/nav/train.png';
 import wait from '../assets/img/nav/waiting.png';
 import walk from '../assets/img/nav/walk.png';
 import { Link, useNavigate } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
+import { useTime } from '../data/TimeContext';
+
 export let ctime = 0;
+export let navPath = [];
 
 const Nav = () => {
     const startStation = useSelector(state => state.startStation);
     const endStation = useSelector(state => state.endStation);
-    const [currentTime, setCurrentTime] = useState(getCurrentTime()); // 현재 시간 상태 변수
     const [dayType, setDayType] = useState(getDayType());
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
+    const { hour, minute } = useTime();
     let ingtime=[0];
+    /*
+    const [results, setResults] = useState([]);
+    */
     const [results, setResults] = useState([
         {
             "path": [
@@ -130,6 +136,7 @@ const Nav = () => {
     ]);
 
 
+
     useEffect(() => {
         const fetchDataFromSpring = async () => {
             try {
@@ -151,21 +158,12 @@ const Nav = () => {
         }
     }, [startStation, endStation]);
     
-
+ 
+    const hourNum = parseInt(hour, 10);
+    const minuteNum = parseInt(minute, 10);
+    ctime = hourNum * 3600 + minuteNum * 60;
+    console.log(ctime);
     
-
-    // 시간 문자열을 초로 변환하는 함수
-    const getCurrentTimeInSeconds = () => {
-        const now = new Date();
-        const hoursInSeconds = now.getHours() * 3600;
-        const minutesInSeconds = now.getMinutes() * 60;
-        const seconds = now.getSeconds();
-        return hoursInSeconds + minutesInSeconds + seconds;
-    };
-    
-    if (ctime === 0) {
-        ctime = getCurrentTimeInSeconds();
-    }
 
     const handleButtonClick = () => {
         setLoading(true);
@@ -179,7 +177,6 @@ const Nav = () => {
 
     const renderResults = () => {
         return results.map((result, index) => (
-            
             <div key={index} className="resultsMap">
                 <h1 className="resultsHeader">길찾기 결과 {index + 1}</h1>
                 <h3>출발 시간: {Math.floor((ctime) / (60*60))}시 {Math.floor((ctime) % (60*60)/60)}분 {Math.floor((ctime)% 60)}초, ({dayType})</h3>
@@ -199,11 +196,24 @@ const Nav = () => {
         ));
     };
 
+
+    const makepath = (results) => {
+        let allPaths = [];
+        results.forEach(result => {
+            allPaths.push(result.path);
+        });
+        return allPaths;
+    };
+
+    const allPaths = makepath(results);
+    navPath = allPaths;
+    console.log(allPaths); // 콘솔에 모든 경로 출력
+
     const renderTransferBars = (result) => {
         const transferBars = [];
         const iconSize = 20; // 이미지 크기
         let i = 0;
-    
+
         // 환승역이 없는 경우 처리
         if (result.eachTransferStation.length === 0) {
             // 출발지에서 도착지까지 바로 이동하는 경우
@@ -273,10 +283,11 @@ const Nav = () => {
         const lastIndex = result.eachTypeOfLine.length - 1; 
         const lastGoBarWidth = (result.eachTime[lastIndex] !== 0 ? result.totalTime - tt: result.totalTime) / totalBarWidth * 1250;
         const lastTotalWidth = lastGoBarWidth;
+
         const lastAdjustedGoBarWidth = lastGoBarWidth / lastTotalWidth * (1250 - accumulatedWidth);
         transferBars.push(
             <div key={`go${lastIndex}`} style={{ display: 'inline-block', width: `${lastGoBarWidth}px`, height: '30px', backgroundColor: getLineColor(result.eachTypeOfLine[lastIndex]), position: 'relative', whiteSpace: 'nowrap', overflow: 'visible' }}>
-                <img src={train} alt="subway" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `${lastAdjustedGoBarWidth}px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
+                <img src={train} alt="subway" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `50px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
                 <span style={{ position: 'absolute', left: '50%', bottom: '-20px', transform: 'translate(-50%, 0)', color: getLineColor(result.eachTypeOfLine[lastIndex]) }}>{Math.floor((result.totalTime - tt)/ 60)}분 {Math.floor(result.eachTime[lastIndex] % 60)}초</span>
                 <span style={{ position: 'absolute', left: '50%', top: '-20px', transform: 'translate(-50%, 0)', color: getLineColor(result.eachTypeOfLine[lastIndex]) }}>{result.eachTransferStation[result.eachTransferStation.length - 1]}({result.eachTypeOfLine[result.eachTypeOfLine.length - 1]})</span>
                 </div>
@@ -310,7 +321,7 @@ const Nav = () => {
                 ) : (
                     <button onClick={handleButtonClick} style={{ backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>AI Predict</button>
                 )}
-            </p></h1> 
+            </p></h1> <p>설정된 시간: {hour}시 {minute}분</p>
                     {startStation && <p className="resultItem">출발지: {startStation}</p>}
                     {endStation && <p className="resultItem">도착지: {endStation}</p>}
                     {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}

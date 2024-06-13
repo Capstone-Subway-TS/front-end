@@ -1,5 +1,3 @@
-// Header.jsx
-
 import React, { useState } from 'react';
 import Logo from '../header/Logo';
 import Menu from '../header/Menu';
@@ -28,10 +26,7 @@ const Header = () => {
                 <button className="toggle-button" onClick={toggleHeader}>{isHeaderVisible ? <IoCloseOutline/> : <IoMdMenu/>}</button>
             </div>
             
-            
-            
-            
-            <header id='header' className={isHeaderVisible ? '' : 'hidden'} role='banner' onClick={closeHeader}>
+            <header id='header' className={isHeaderVisible ? '' : 'hidden'}>
                 <Logo />
                 <Dest />
                 <Menu />

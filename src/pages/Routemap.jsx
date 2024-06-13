@@ -8,6 +8,7 @@ import { IoSearch } from "react-icons/io5";
 import { setStartStation, setEndStation } from '../data/actions';
 import Right from '../components/section/Right'; // 추가
 
+
 const Routemap = () => {
     const ref = useRef();
     const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const Routemap = () => {
     const [isRightVisible, setIsRightVisible] = useState(false); // 추가
     const [stationName, setStationName] = useState(null);
     const [suggestions, setSuggestions] = useState([]); // Define suggestions state
-
+    const [searchedStationX, setSearchedStationX] = useState(null);
+    const [searchedStationY, setSearchedStationY] = useState(null);
     // 제안 항목 클릭 처리 함수
     const handleSuggestionItemClick = (suggestion) => {
         // '-' 포함 여부 확인하고 이후 문자열 제거
@@ -157,6 +159,8 @@ const Routemap = () => {
             const [clickX, clickY] = d3.pointer(event, svg.node());
             showTooltip(d, clickX, clickY);
 
+            
+
             // 다른 곳을 클릭했을 때 툴팁을 제거합니다.
             d3.select("body").on("click.tooltip", function () {
                 d3.select(".tooltip").remove();
@@ -178,13 +182,13 @@ const Routemap = () => {
             .attr("font-weight", "bold") // 굵은 텍스트 설정
             .text(d => d.name);
 
-        // 말풍선 표시 함수
-        const showTooltip = (data, clickX, clickY) => {
+// 말풍선 표시 함수
+        const showTooltip = (data, x, y) => {
             d3.select(".tooltip").remove(); // 기존 툴팁 제거
 
             const tooltip = svg.append("g")
                 .attr("class", "tooltip")
-                .attr("transform", `translate(${clickX - 120}, ${clickY - 120})`);
+                .attr("transform", `translate(${x}, ${y })`);
 
             tooltip.append("rect")
                 .attr("width", 600)
@@ -207,6 +211,8 @@ const Routemap = () => {
                 { text: '도착', x: 60, y: 120, color: '#f0f0f0' },   // Gray color for 도착 button
                 { text: '실시간 도착정보', x: 190, y: 120, color: '#ff6347', width: 280, newx: 285 } // Red color for 실시간 도착정보 button
             ];
+
+            
 
             // 버튼 생성
             buttons.forEach(button => {
@@ -250,16 +256,47 @@ const Routemap = () => {
                         } else {
                         }
                     });
+
             });
+
         };
+
+        // 빨간색 원을 저장할 변수
+let highlightedCircle;
+
+function removeHighlightedCircle() {
+    if (highlightedCircle) {
+        highlightedCircle.remove();
+        highlightedCircle = null;
+    }
+}
 
         // 검색어 처리 로직
         if (isSearching && searchTerm.trim() !== '') {
             const searchedStation = subwayData.find(station => station.name.includes(searchTerm.trim()));
             if (searchedStation) {
                 // 검색된 역의 위치에 말풍선 표시
-                const [searchedX, searchedY] = [xScale(parseFloat(searchedStation.x)) * 4, yScale(parseFloat(searchedStation.y)) * 3.7 - 200];
+                const [searchedX, searchedY] = [xScale(parseFloat(searchedStation.x)) * 4+100, yScale(parseFloat(searchedStation.y)) * 3.7 - 200];
+                setSearchedStationX(searchedX);
+                setSearchedStationY(searchedY);
                 showTooltip(searchedStation, searchedX, searchedY);
+                svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(750 / 2 - searchedX, 500 / 2 - searchedY).scale(2));
+
+                // 이전에 강조된 원이 있으면 제거
+                removeHighlightedCircle();
+
+                // 검색된 역의 위치에 빨간색 원 추가
+                svg.append("circle")
+                    .attr("cx", searchedX+175)
+                    .attr("cy", searchedY+250)
+                    .attr("r", 28) // 반지름 크기 조절
+                    .attr("fill", "red") // 빨간색으로 채우기
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1)
+                    .on("click", (event, d) => {
+                        event.stopPropagation(); // 이벤트 버블링 방지
+                        showTooltip(searchedStation, searchedX, searchedY);
+                    });
             }
         }
 
@@ -306,6 +343,7 @@ const Routemap = () => {
                     position: 'relative'
                 }}
             >
+                <div class="rectangle">
                 <svg
                     ref={ref}
                     viewBox="0 -300 1500 1800"
@@ -317,6 +355,7 @@ const Routemap = () => {
                         left: 0
                     }}
                 ></svg>
+                </div>
             </div>
             {isRightVisible && <Right isVisible={isRightVisible} toggleRightVisibility={toggleRightVisibility} stationName={stationName} />} {/* Right 컴포넌트 렌더링 */}
         </Main>

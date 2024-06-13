@@ -7,6 +7,8 @@ import wait from '../assets/img/nav/waiting.png';
 import walk from '../assets/img/nav/walk.png';
 import { Link, useNavigate } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
 import { ctime } from './Nav';
+import { useTime } from '../data/TimeContext';
+import { navPath } from './Nav';
 
 const Pre = () => {
     const startStation = useSelector(state => state.startStation);
@@ -15,123 +17,120 @@ const Pre = () => {
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
     let ingtime=[0];
+    const { hour, minute } = useTime();
     const currentTime = ctime;
     const [results, setResults] = useState([
         {
             "path": [
-                "장한평",
+                "어린이대공원(세종대)",
+                "군자(능동)",
+                "아차산(어린이대공원후문)",
+                "광나루(장신대)",
+                "천호(풍납토성)"
+            ],
+            "curtime": 61691,
+            "eachTransferStation": [
                 "군자(능동)"
             ],
-            "finalTime": "12:31:55",
-            "eachTransferStation": [],
-            "startLine": "5호선",
-            "eachTime": [],
-            "eachWalkingTime": [],
-            "eachTypeOfLine": [],
-            "eachWaitingTime": [],
-            "totalTime": 100
+            "startLine": "7호선",
+            "eachTime": [
+                110
+            ],
+            "eachWalkingTime": [
+                180
+            ],
+            "eachTypeOfLine": [
+                "5호선"
+            ],
+            "eachWaitingTime": [
+                240
+            ],
+            "totalTime": 909,
+            "finalTime": "15:50:20"
         },
         {
             "path": [
-                "장한평",
-                "답십리",
-                "마장",
-                "왕십리(성동구청)",
-                "한양대",
-                "뚝섬",
-                "성수",
-                "건대입구",
                 "어린이대공원(세종대)",
-                "군자(능동)"
-            ],
-            "finalTime": "13:05:40",
-            "eachTransferStation": [
-                "왕십리(성동구청)",
                 "건대입구",
-                "수락산"
+                "구의",
+                "강변",
+                "잠실나루",
+                "잠실",
+                "몽촌토성(평화의문)",
+                "강동구청",
+                "천호(풍납토성)"
             ],
-            "startLine": "5호선",
+            "curtime": 61691,
+            "eachTransferStation": [
+                "건대입구",
+                "잠실"
+            ],
+            "startLine": "7호선",
             "eachTime": [
-                260,
-                330,
-                400
+                110,
+                420
             ],
             "eachWalkingTime": [
                 180,
-                240,
-                400
+                240
             ],
             "eachTypeOfLine": [
                 "2호선",
-                "7호선",
-                "2호선"
-
+                "8호선"
             ],
             "eachWaitingTime": [
-                265,
-                90,
-                400
+                56,
+                30
             ],
-            "totalTime": 3325
+            "totalTime": 1666,
+            "finalTime": "16:00:30"
         },
         {
             "path": [
-                "장한평",
-                "답십리",
+                "어린이대공원(세종대)",
+                "건대입구",
+                "성수",
+                "뚝섬",
+                "한양대",
+                "왕십리",
                 "마장",
-                "왕십리(성동구청)",
-                "행당",
-                "신금호",
-                "청구",
-                "신당",
-                "동묘앞",
-                "창신",
-                "보문",
-                "안암(고대병원앞)",
-                "고려대(종암)",
-                "월곡(동덕여대)",
-                "상월곡(한국과학기술연구원)",
-                "돌곶이",
-                "석계",
-                "태릉입구",
-                "먹골",
-                "중화",
-                "상봉(시외버스터미널)",
-                "면목",
-                "사가정",
-                "용마산",
-                "중곡",
-                "군자(능동)"
+                "답십리",
+                "장한평",
+                "군자(능동)",
+                "아차산(어린이대공원후문)",
+                "광나루(장신대)",
+                "천호(풍납토성)"
             ],
-            "finalTime": "13:25:50",
+            "curtime": 61691,
             "eachTransferStation": [
-                "청구",
-                "태릉입구"
+                "건대입구",
+                "왕십리"
             ],
-            "startLine": "5호선",
+            "startLine": "7호선",
             "eachTime": [
-                500,
-                810
+                110,
+                363
             ],
             "eachWalkingTime": [
-                120,
-                120
+                180,
+                180
             ],
             "eachTypeOfLine": [
-                "6호선",
-                "7호선"
+                "2호선",
+                "5호선"
             ],
             "eachWaitingTime": [
-                465,
-                90
+                326,
+                140
             ],
-            "totalTime": 3335
+            "totalTime": 2286,
+            "finalTime": "16:10:50"
         }
     ]);
 
 
     
-
+    console.log(navPath);
 
 
     const renderResults = () => {
@@ -179,21 +178,21 @@ const Pre = () => {
     const totalBarWidth = result.totalTime;
     let accumulatedWidth = 0;
     let tt = 0; // tt 변수 초기화
-    
 
-    result.eachTypeOfLine.forEach((line, index) => {
-        const goBarWidth = result.eachTime[index] / totalBarWidth * 1250;
-        const transferBarWidth = result.eachWalkingTime[index] / totalBarWidth * 1250;
-        const waitingBarWidth = result.eachWaitingTime[index] / totalBarWidth * 1250;
-        ingtime[index]=0;
 
-        // 각 막대의 총합이 1250이 되도록 비율 조정
-        const totalRatio = goBarWidth + transferBarWidth + waitingBarWidth;
-        const adjustedGoBarWidth = goBarWidth / totalRatio * 1250;
-        const adjustedTransferBarWidth = transferBarWidth / totalRatio * 1250;
-        const adjustedWaitingBarWidth = waitingBarWidth / totalRatio * 1250;
-            
-    
+        result.eachTypeOfLine.forEach((line, index) => {
+            const goBarWidth = result.eachTime[index] / totalBarWidth * 1250;
+            const transferBarWidth = result.eachWalkingTime[index] / totalBarWidth * 1250;
+            const waitingBarWidth = result.eachWaitingTime[index] / totalBarWidth * 1250;
+            ingtime[index]=0;
+
+            // 각 막대의 총합이 1250이 되도록 비율 조정
+            const totalRatio = goBarWidth + transferBarWidth + waitingBarWidth;
+            const adjustedGoBarWidth = goBarWidth / totalRatio * 1250;
+            const adjustedTransferBarWidth = transferBarWidth / totalRatio * 1250;
+            const adjustedWaitingBarWidth = waitingBarWidth / totalRatio * 1250;
+
+
             transferBars.push(
                 <div key={`go${index}`} style={{ display: 'inline-block', width: `${goBarWidth}px`, height: '30px', backgroundColor: getLineColor(index === 0 ? result.startLine : result.eachTypeOfLine[index - 1]), position: 'relative', whiteSpace: 'nowrap', overflow: 'visible' }}>
                     <img src={train} alt="subway" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `${adjustedGoBarWidth}px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
@@ -201,14 +200,14 @@ const Pre = () => {
                     <span style={{ position: 'absolute', left: '50%', top: '-20px', transform: 'translate(-50%, 0)', color: getLineColor(index === 0 ? result.startLine : result.eachTypeOfLine[index - 1]) }}>{(index === 0 ? startStation : result.eachTransferStation[index - 1])}({(index === 0 ? result.startLine : result.eachTypeOfLine[index - 1])})</span>
                 </div>
             );
-    
+
             transferBars.push(
                 <div key={`transfer${index}`} style={{ display: 'inline-block', width: `${transferBarWidth}px`, height: '30px', backgroundColor: 'lightgray', position: 'relative', whiteSpace: 'nowrap', overflow: 'visible' }}>
                     <img src={walk} alt="walk" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `${adjustedTransferBarWidth}px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
                     <span style={{ position: 'absolute', left: '50%', bottom: '-20px', transform: 'translate(-50%, 0)', color: '#000' }}>{Math.floor(result.eachWalkingTime[index] / 60)}분 {Math.floor(result.eachWalkingTime[index] % 60)}초</span>
                 </div>
             );
-    
+
             transferBars.push(
                 <div key={`wait${index}`} style={{ display: 'inline-block', width: `${waitingBarWidth}px`, height: '30px', backgroundColor: 'red', position: 'relative', whiteSpace: 'nowrap', overflow: 'visible' }}>
                     <img src={wait} alt="wait" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `${adjustedWaitingBarWidth}px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
@@ -226,18 +225,19 @@ const Pre = () => {
             accumulatedWidth += adjustedGoBarWidth + adjustedTransferBarWidth + adjustedWaitingBarWidth;
             tt = tt+result.eachTime[index]+result.eachWalkingTime[index]+result.eachWaitingTime[index];
         });
-    
+
         // 마지막 열차 막대 추가
-        const lastIndex = result.eachTypeOfLine.length - 1; 
+        const lastIndex = result.eachTypeOfLine.length - 1;
         const lastGoBarWidth = (result.eachTime[lastIndex] !== 0 ? result.totalTime - tt: result.totalTime) / totalBarWidth * 1250;
         const lastTotalWidth = lastGoBarWidth;
+
         const lastAdjustedGoBarWidth = lastGoBarWidth / lastTotalWidth * (1250 - accumulatedWidth);
         transferBars.push(
             <div key={`go${lastIndex}`} style={{ display: 'inline-block', width: `${lastGoBarWidth}px`, height: '30px', backgroundColor: getLineColor(result.eachTypeOfLine[lastIndex]), position: 'relative', whiteSpace: 'nowrap', overflow: 'visible' }}>
-                <img src={train} alt="subway" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `${lastAdjustedGoBarWidth}px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
+                <img src={train} alt="subway" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', maxWidth: `50px`, maxHeight: '100%', width: 'auto', height: 'auto' }} />
                 <span style={{ position: 'absolute', left: '50%', bottom: '-20px', transform: 'translate(-50%, 0)', color: getLineColor(result.eachTypeOfLine[lastIndex]) }}>{Math.floor((result.totalTime - tt)/ 60)}분 {Math.floor(result.eachTime[lastIndex] % 60)}초</span>
                 <span style={{ position: 'absolute', left: '50%', top: '-20px', transform: 'translate(-50%, 0)', color: getLineColor(result.eachTypeOfLine[lastIndex]) }}>{result.eachTransferStation[result.eachTransferStation.length - 1]}({result.eachTypeOfLine[result.eachTypeOfLine.length - 1]})</span>
-                </div>
+            </div>
         );
         return transferBars;
     };
@@ -262,7 +262,7 @@ const Pre = () => {
             <Main title="실시간 길찾기" description="실시간 길찾기 페이지">
                 
                 <div className="resultsContainer">
-                    <h1 className="resultsHeader">출발지/도착지</h1> 
+                    <h1 className="resultsHeader">출발지/도착지</h1> <p>설정된 시간: {hour}시 {minute}분</p>
                     {startStation && <p className="resultItem">출발지: {startStation}</p>}
                     {endStation && <p className="resultItem">도착지: {endStation}</p>}
                     {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}
