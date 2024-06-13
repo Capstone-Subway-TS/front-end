@@ -5,7 +5,7 @@ import { getCurrentTime, getDayType } from '../data/time';
 import train from '../assets/img/nav/train.png';
 import wait from '../assets/img/nav/waiting.png';
 import walk from '../assets/img/nav/walk.png';
-import { Link, useNavigate } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
+import { Link, useNavigate,useLocation } from 'react-router-dom'; // React Router를 사용한다고 가정합니다.
 import { ctime } from './Nav';
 import { useTime } from '../data/TimeContext';
 import { navPath } from './Nav';
@@ -19,122 +19,41 @@ const Pre = () => {
     let ingtime=[0];
     const { hour, minute } = useTime();
     const currentTime = ctime;
-    const [results, setResults] = useState([
-        {
-            "path": [
-                "어린이대공원(세종대)",
-                "군자(능동)",
-                "아차산(어린이대공원후문)",
-                "광나루(장신대)",
-                "천호(풍납토성)"
-            ],
-            "curtime": 61691,
-            "eachTransferStation": [
-                "군자(능동)"
-            ],
-            "startLine": "7호선",
-            "eachTime": [
-                110
-            ],
-            "eachWalkingTime": [
-                180
-            ],
-            "eachTypeOfLine": [
-                "5호선"
-            ],
-            "eachWaitingTime": [
-                240
-            ],
-            "totalTime": 909,
-            "finalTime": "15:50:20"
-        },
-        {
-            "path": [
-                "어린이대공원(세종대)",
-                "건대입구",
-                "구의",
-                "강변",
-                "잠실나루",
-                "잠실",
-                "몽촌토성(평화의문)",
-                "강동구청",
-                "천호(풍납토성)"
-            ],
-            "curtime": 61691,
-            "eachTransferStation": [
-                "건대입구",
-                "잠실"
-            ],
-            "startLine": "7호선",
-            "eachTime": [
-                110,
-                420
-            ],
-            "eachWalkingTime": [
-                180,
-                240
-            ],
-            "eachTypeOfLine": [
-                "2호선",
-                "8호선"
-            ],
-            "eachWaitingTime": [
-                56,
-                30
-            ],
-            "totalTime": 1666,
-            "finalTime": "16:00:30"
-        },
-        {
-            "path": [
-                "어린이대공원(세종대)",
-                "건대입구",
-                "성수",
-                "뚝섬",
-                "한양대",
-                "왕십리",
-                "마장",
-                "답십리",
-                "장한평",
-                "군자(능동)",
-                "아차산(어린이대공원후문)",
-                "광나루(장신대)",
-                "천호(풍납토성)"
-            ],
-            "curtime": 61691,
-            "eachTransferStation": [
-                "건대입구",
-                "왕십리"
-            ],
-            "startLine": "7호선",
-            "eachTime": [
-                110,
-                363
-            ],
-            "eachWalkingTime": [
-                180,
-                180
-            ],
-            "eachTypeOfLine": [
-                "2호선",
-                "5호선"
-            ],
-            "eachWaitingTime": [
-                326,
-                140
-            ],
-            "totalTime": 2286,
-            "finalTime": "16:10:50"
-        }
-    ]);
-
-
+    const [result, setResult] = useState([]);
+    const location = useLocation();
     
     console.log(navPath);
 
 
+    useEffect(() => {
+        // 첫 번째 서비스에서 전달된 데이터
+        const firstServiceData = location.state?.results;
+
+        // 데이터가 존재하는 경우에만 두 번째 서비스 호출
+        if (firstServiceData) {
+            const fetchSecondServiceData = async () => {
+                try {
+                    const response = await fetch('http://localhost:8080/Predict', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(firstServiceData),
+                    });
+                    const secondServiceData = await response.json();
+                    setResult(secondServiceData);
+                    console.log('두 번째 서비스 응답 데이터:', secondServiceData);
+                } catch (error) {
+                    console.error('두 번째 서비스 요청 실패:', error);
+                }
+            };
+
+            fetchSecondServiceData();
+        }
+    }, [location]);
+
     const renderResults = () => {
-        return results.map((result, index) => (
+        return result.map((result, index) => (
             
             
             <div key={index} className="resultsMap">
@@ -254,7 +173,6 @@ const Pre = () => {
             };
             return lineColors[line] || '#000'; // 기본 색상은 검정색
         };
-
         
 
 

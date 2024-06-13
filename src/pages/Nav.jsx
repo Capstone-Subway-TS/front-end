@@ -19,121 +19,8 @@ const Nav = () => {
     const navigate  = useNavigate(); // useHistory 훅 사용
     const { hour, minute } = useTime();
     let ingtime=[0];
-    /*
-    const [results, setResults] = useState([]);
-    */
-    const [results, setResults] = useState([
-        {
-            "path": [
-                "장한평",
-                "군자(능동)"
-            ],
-            "finalTime": "12:31:55",
-            "eachTransferStation": [],
-            "startLine": "5호선",
-            "eachTime": [],
-            "eachWalkingTime": [],
-            "eachTypeOfLine": [],
-            "eachWaitingTime": [],
-            "totalTime": 100
-        },
-        {
-            "path": [
-                "장한평",
-                "답십리",
-                "마장",
-                "왕십리(성동구청)",
-                "한양대",
-                "뚝섬",
-                "성수",
-                "건대입구",
-                "어린이대공원(세종대)",
-                "군자(능동)"
-            ],
-            "finalTime": "13:05:40",
-            "eachTransferStation": [
-                "왕십리(성동구청)",
-                "건대입구",
-                "수락산"
-            ],
-            "startLine": "5호선",
-            "eachTime": [
-                260,
-                330,
-                400
-            ],
-            "eachWalkingTime": [
-                180,
-                240,
-                400
-            ],
-            "eachTypeOfLine": [
-                "2호선",
-                "7호선",
-                "2호선"
 
-            ],
-            "eachWaitingTime": [
-                265,
-                90,
-                400
-            ],
-            "totalTime": 3325
-        },
-        {
-            "path": [
-                "장한평",
-                "답십리",
-                "마장",
-                "왕십리(성동구청)",
-                "행당",
-                "신금호",
-                "청구",
-                "신당",
-                "동묘앞",
-                "창신",
-                "보문",
-                "안암(고대병원앞)",
-                "고려대(종암)",
-                "월곡(동덕여대)",
-                "상월곡(한국과학기술연구원)",
-                "돌곶이",
-                "석계",
-                "태릉입구",
-                "먹골",
-                "중화",
-                "상봉(시외버스터미널)",
-                "면목",
-                "사가정",
-                "용마산",
-                "중곡",
-                "군자(능동)"
-            ],
-            "finalTime": "13:25:50",
-            "eachTransferStation": [
-                "청구",
-                "태릉입구"
-            ],
-            "startLine": "5호선",
-            "eachTime": [
-                500,
-                810
-            ],
-            "eachWalkingTime": [
-                120,
-                120
-            ],
-            "eachTypeOfLine": [
-                "6호선",
-                "7호선"
-            ],
-            "eachWaitingTime": [
-                465,
-                90
-            ],
-            "totalTime": 3335
-        }
-    ]);
+    const [results, setResults] = useState([]);
 
 
 
@@ -169,7 +56,7 @@ const Nav = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            navigate('/Pre');
+            navigate('/Pre',{state:{results:results}});
         }, 1000);
     };
     
