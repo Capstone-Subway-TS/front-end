@@ -17,7 +17,7 @@ const Nav = () => {
     const [dayType, setDayType] = useState(getDayType());
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
-    const { hour, minute } = useTime();
+    const { hour, minute, weekday } = useTime();
     let ingtime=[0];
 
     const [results, setResults] = useState([]);
@@ -208,7 +208,7 @@ const Nav = () => {
                 ) : (
                     <button onClick={handleButtonClick} style={{ backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>AI Predict</button>
                 )}
-            </p></h1> <p>설정된 시간: {hour}시 {minute}분</p>
+            </p></h1> <p>설정된 시간: {hour}시 {minute}분 ({weekday})</p>
                     {startStation && <p className="resultItem">출발지: {startStation}</p>}
                     {endStation && <p className="resultItem">도착지: {endStation}</p>}
                     {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}

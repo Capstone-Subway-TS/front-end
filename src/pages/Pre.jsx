@@ -17,7 +17,7 @@ const Pre = () => {
     const [loading, setLoading] = useState(false); // 로딩 상태 변수
     const navigate  = useNavigate(); // useHistory 훅 사용
     let ingtime=[0];
-    const { hour, minute } = useTime();
+    const { hour, minute, weekday } = useTime();
     const currentTime = ctime;
     const [result, setResult] = useState([]);
     const location = useLocation();
@@ -180,7 +180,7 @@ const Pre = () => {
             <Main title="실시간 길찾기" description="실시간 길찾기 페이지">
                 
                 <div className="resultsContainer">
-                    <h1 className="resultsHeader">출발지/도착지</h1> <p>설정된 시간: {hour}시 {minute}분</p>
+                    <h1 className="resultsHeader">출발지/도착지</h1> <p>설정된 시간: {hour}시 {minute}분 ({weekday})</p>
                     {startStation && <p className="resultItem">출발지: {startStation}</p>}
                     {endStation && <p className="resultItem">도착지: {endStation}</p>}
                     {!startStation && <p className="resultItem">출발지 정보가 없습니다.</p>}
